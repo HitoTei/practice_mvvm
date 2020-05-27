@@ -16,10 +16,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+    - name: Flutter action
+      uses: subosito/flutter-action@v1.3.2
+      with:
+        # The Flutter version to make available on the path
+        flutter-version: '1.12.x' # optional
+        # The Flutter build release channel
+        channel: 'stable' # optional, default is stable
     - name: Install dependencies
       run: flutter pub get
     
     - name: Run tests
-      run: flutter pub run test
+      run: flutter test
       
