@@ -24,7 +24,7 @@ class SqlProvider {
         await db.execute(
           '''CREATE TABLE 
           ${World().getTableName()}(
-          $idStr INTEGER PRIMARY KEY,
+          $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
           $createTimeStr TEXT,
           $updateTimeStr TEXT,
           $titleStr TEXT
@@ -33,7 +33,7 @@ class SqlProvider {
         await db.execute('''
         CREATE TABLE 
           ${Story().getTableName()}(
-          $idStr INTEGER PRIMARY KEY,
+          $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
           $worldIdStr INTEGER,
           $createTimeStr TEXT,
           $updateTimeStr TEXT,
@@ -62,6 +62,15 @@ class SqlProvider {
       work.getTableName(),
       where: '${idStr} = ?',
       whereArgs: <dynamic>[work.id],
+    );
+  }
+
+  Future<void> deleteWorldStory(int worldId) async {
+    final db = await _db;
+    db.delete(
+      Story().getTableName(),
+      where: '${worldIdStr} = ?',
+      whereArgs: <dynamic>[worldId],
     );
   }
 

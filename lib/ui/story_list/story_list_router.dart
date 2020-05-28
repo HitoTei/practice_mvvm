@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practicemvvm/ui/story_list/story_list_page.dart';
 import 'package:practicemvvm/ui/story_list/story_view_model.dart';
-import 'package:practicemvvm/ui/world_list/world_list_page.dart';
 import 'package:provider/provider.dart';
 
 class StoryListRouterPage extends StatelessWidget {
@@ -14,6 +14,6 @@ class StoryListRouterPage extends StatelessWidget {
       return const CircularProgressIndicator();
     }
 
-    return WorldListPage();
+    return StoryListPage();
   }
 }
