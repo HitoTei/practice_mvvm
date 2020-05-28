@@ -1,7 +1,10 @@
+import 'package:practicemvvm/model/work.dart';
+
 import 'constant_strings.dart';
 
-class World {
+class World extends Work {
   World();
+  @override
   World.fromMap(Map<String, dynamic> map) {
     id = map[idStr] as int;
     createTime = DateTime.parse(map[createTimeStr] as String);
@@ -9,11 +12,7 @@ class World {
     title = map[titleStr] as String;
   }
 
-  int id; // ユニークid
-  DateTime createTime; // 作成時刻
-  DateTime updateTime; // 更新時刻
-  String title; // タイトル
-
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       idStr: id,
@@ -21,5 +20,10 @@ class World {
       updateTimeStr: updateTime.toString(),
       titleStr: title,
     };
+  }
+
+  @override
+  String getTableName() {
+    return 'worlds';
   }
 }

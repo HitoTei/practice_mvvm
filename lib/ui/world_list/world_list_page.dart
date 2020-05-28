@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:practicemvvm/model/world.dart';
-import 'package:practicemvvm/ui/home/worlds_view_model.dart';
+import 'package:practicemvvm/ui/story_list/story_home_page.dart';
+import 'package:practicemvvm/ui/world_list/worlds_view_model.dart';
 import 'package:provider/provider.dart';
 
 class WorldListPage extends StatelessWidget {
@@ -21,15 +22,24 @@ class WorldListPage extends StatelessWidget {
 class WorldTile extends StatelessWidget {
   const WorldTile(World world) : _world = world;
   final World _world;
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text('タイトル: ${_world.title}'),
-        Text('作成時間: ${_world.createTime}'),
-        Text('更新期間: ${_world.updateTime}'),
-      ],
+    return FlatButton(
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute<StoryHomePage>(
+          builder: (BuildContext context) {
+            return StoryHomePage(_world);
+          },
+        ),
+      ),
+      child: Column(
+        children: <Widget>[
+          Text('タイトル: ${_world.title}'),
+          Text('作成時間: ${_world.createTime}'),
+          Text('更新期間: ${_world.updateTime}'),
+        ],
+      ),
     );
   }
 }
