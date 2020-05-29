@@ -1,35 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:practicemvvm/base/tile_factory.dart';
 import 'package:practicemvvm/base/works_view_model.dart';
 import 'package:practicemvvm/model/work.dart';
 import 'package:practicemvvm/ui/base_list/work_list_router.dart';
 import 'package:provider/provider.dart';
 
-class TestWork extends Work {
-  @override
-  Widget tile(BuildContext context) {
-    return const Text('hoge');
-  }
-
-  @override
-  String getTableName() {
-    throw UnimplementedError();
-  }
-
-  @override
-  Map<String, dynamic> toMap() {
-    throw UnimplementedError();
-  }
-}
-
 class TestViewModel extends WorksViewModel {
   List<Work> list;
 
   @override
-  Future<void> queryWorks() async {
-    // await Future<dynamic>.delayed(const Duration(seconds: 1));
-    list = [for (int i = 0; i < 10; i++) TestWork()];
-  }
+  Future<void> queryWorks() async {}
 
   @override
   List<Work> getWorkList() {
@@ -53,7 +34,7 @@ class TestViewModel extends WorksViewModel {
 }
 
 Future<void> main() async {
-  await testWidgets(
+  testWidgets(
     'プログレスサークルのテスト',
     (WidgetTester tester) async {
       await tester.pumpWidget(
@@ -63,6 +44,10 @@ Future<void> main() async {
               ChangeNotifierProvider<WorksViewModel>(
                 create: (_) => TestViewModel(),
               ),
+              Provider.value(
+                value: (BuildContext context, dynamic value) =>
+                    const Text('hoge'),
+              ),
             ],
             child: WorkListRouterPage(),
           ),
@@ -71,6 +56,33 @@ Future<void> main() async {
       expect(
         find.byType(CircularProgressIndicator),
         findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets(
+    'タイルのテスト',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: MultiProvider(
+            providers: [
+              ChangeNotifierProvider<WorksViewModel>(
+                create: (_) => TestViewModel()..list = [null, null, null],
+              ),
+              Provider<TileFactory>.value(
+                value: (BuildContext context, dynamic value) =>
+                    const Text('hoge'),
+              ),
+            ],
+            child: WorkListRouterPage(),
+          ),
+        ),
+      );
+
+      expect(
+        find.byType(Text),
+        findsWidgets,
       );
     },
   );

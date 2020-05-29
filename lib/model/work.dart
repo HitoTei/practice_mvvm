@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 abstract class Work {
   Work();
 
@@ -13,5 +11,4 @@ abstract class Work {
   Map<String, dynamic> toMap();
 
   String getTableName(); // Sqlでのテーブルの名前
-  Widget tile(BuildContext context);
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:practicemvvm/model/work.dart';
 
 import 'constant_strings.dart';
@@ -34,17 +33,5 @@ class Story extends Work {
   @override
   String getTableName() {
     return 'stories';
-  }
-
-  @override
-  Widget tile(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text('タイトル: $title'),
-        Text('世界: $worldId'),
-        Text('作成時間: $createTime'),
-        Text('更新期間: $updateTime'),
-      ],
-    );
   }
 }
