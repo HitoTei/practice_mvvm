@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:practicemvvm/model/work.dart';
+import 'package:practicemvvm/ui/story_list/story_home_page.dart';
 
 import 'constant_strings.dart';
 
 class World extends Work {
   World();
+
   @override
   World.fromMap(Map<String, dynamic> map) {
     id = map[idStr] as int;
@@ -25,5 +29,26 @@ class World extends Work {
   @override
   String getTableName() {
     return 'worlds';
+  }
+
+  @override
+  Widget tile(BuildContext context) {
+    return FlatButton(
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute<StoryHomePage>(
+          builder: (BuildContext context) {
+            return StoryHomePage(this);
+          },
+        ),
+      ),
+      child: Column(
+        children: <Widget>[
+          Text('タイトル: $title'),
+          Text('作成時間: $createTime'),
+          Text('更新期間: $updateTime'),
+        ],
+      ),
+    );
   }
 }

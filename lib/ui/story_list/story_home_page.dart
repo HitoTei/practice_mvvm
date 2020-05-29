@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:practicemvvm/base/works_view_model.dart';
 import 'package:practicemvvm/model/world.dart';
-import 'package:practicemvvm/ui/story_list/story_list_router.dart';
+import 'package:practicemvvm/ui/base_list/work_list_router.dart';
 import 'package:practicemvvm/ui/story_list/story_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'insert_story_button.dart';
+import '../base_list/insert_work_button.dart';
 
 class StoryHomePage extends StatelessWidget {
   const StoryHomePage(World world) : _world = world;
@@ -14,7 +15,7 @@ class StoryHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
+        ChangeNotifierProvider<WorksViewModel>(
           create: (_) => StoriesViewModel(_world),
         ),
       ],
@@ -24,10 +25,10 @@ class StoryHomePage extends StatelessWidget {
             _world.title,
           ),
           actions: <Widget>[
-            InsertStoryButton(),
+            InsertWorkButton(),
           ],
         ),
-        body: StoryListRouterPage(),
+        body: WorkListRouterPage(),
       ),
     );
   }

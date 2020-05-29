@@ -1,39 +1,48 @@
-import 'package:flutter/cupertino.dart';
+import 'package:practicemvvm/base/works_view_model.dart';
 import 'package:practicemvvm/model/story.dart';
+import 'package:practicemvvm/model/work.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/provider/sql_provider.dart';
 
-class StoriesViewModel with ChangeNotifier {
+class StoriesViewModel extends WorksViewModel {
   StoriesViewModel(this.world);
 
   List<Story> storyList = null;
   World world;
 
-  Future<void> queryStories() async {
+  @override
+  List<Work> getWorkList() => storyList;
+
+  @override
+  Future<void> queryWorks() async {
     storyList = await SqlProvider().queryWorldStoryListWithoutContent(world.id);
     notifyListeners();
   }
 
-  Future<void> updateStory(Story story) async {
-    story.updateTime = DateTime.now();
-    SqlProvider().insert(story);
+  @override
+  Future<void> updateWork(Work work) async {
+    work.updateTime = DateTime.now();
+    SqlProvider().insert<Story>(work as Story);
     notifyListeners();
   }
 
-  Future<void> insertNewStory(String title) async {
+  @override
+  Future<void> insertNewWork(String title) async {
+    final time = DateTime.now();
     final story = Story()
       ..title = title
       ..worldId = world.id
-      ..createTime = DateTime.now()
-      ..updateTime = DateTime.now();
+      ..createTime = time
+      ..updateTime = time;
 
     await SqlProvider().insert(story);
-    queryStories();
+    queryWorks();
   }
 
-  Future<void> deleteStory(Story story) async {
-    await SqlProvider().delete(story);
-    deleteStory(story);
+  @override
+  Future<void> deleteWork(Work work) async {
+    await SqlProvider().delete<Story>(work as Story);
+    storyList.remove(work);
     notifyListeners();
   }
 }

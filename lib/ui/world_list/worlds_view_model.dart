@@ -1,39 +1,48 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:practicemvvm/base/works_view_model.dart';
+import 'package:practicemvvm/model/work.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/provider/sql_provider.dart';
 
-class WorldsViewModel with ChangeNotifier {
+class WorldsViewModel extends WorksViewModel {
   List<World> worldList = null;
 
-  Future<void> queryWorlds() async {
+  @override
+  List<Work> getWorkList() => worldList;
+
+  @override
+  Future<void> queryWorks() async {
     worldList = await SqlProvider().queryWorldList();
     notifyListeners();
   }
 
-  Future<void> updateWorld(World world) async {
-    world.updateTime = DateTime.now();
-    SqlProvider().insert(world);
+  @override
+  Future<void> updateWork(Work work) async {
+    work.updateTime = DateTime.now();
+    await SqlProvider().insert<World>(work as World);
 
     notifyListeners();
   }
 
-  Future<void> insertNewWorld(String title) async {
+  @override
+  Future<void> insertNewWork(String title) async {
+    final time = DateTime.now();
     final world = World()
       ..title = title
-      ..createTime = DateTime.now()
-      ..updateTime = DateTime.now();
+      ..createTime = time
+      ..updateTime = time;
 
     await SqlProvider().insert(world);
-    queryWorlds();
+    queryWorks();
   }
 
-  Future<void> deleteWorld(World world) async {
-    await SqlProvider().delete(world);
-    SqlProvider().deleteWorldStory(world.id); // こっちは特に待つ必要がない。
+  @override
+  Future<void> deleteWork(Work work) async {
+    await SqlProvider().delete<World>(work as World);
+    SqlProvider().deleteWorldStory(work.id); // こっちは特に待つ必要がない。
 
-    worldList.remove(world);
+    worldList.remove(work);
     notifyListeners();
   }
 }

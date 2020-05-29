@@ -37,7 +37,7 @@ class Story extends Work {
   }
 
   @override
-  Widget tile() {
+  Widget tile(BuildContext context) {
     return Column(
       children: <Widget>[
         Text('タイトル: $title'),
