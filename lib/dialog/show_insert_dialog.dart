@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 Future<void> showInsertDialog(
-    BuildContext context, Function(String) insert) async {
+  BuildContext context,
+  Function(String) insert,
+) async {
   String title;
 
   return showDialog(

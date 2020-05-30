@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:practicemvvm/base/works_view_model.dart';
+import 'package:practicemvvm/dialog/show_delete_dialog.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/ui/story_list/story_home_page.dart';
+import 'package:provider/provider.dart';
 
 Widget worldTile(BuildContext context, dynamic value) {
   final world = value as World;
@@ -12,6 +15,11 @@ Widget worldTile(BuildContext context, dynamic value) {
           return StoryHomePage(world);
         },
       ),
+    ),
+    onLongPress: () => showDeleteDialog(
+      context,
+      () =>
+          Provider.of<WorksViewModel>(context, listen: false).deleteWork(world),
     ),
     child: Column(
       children: <Widget>[
