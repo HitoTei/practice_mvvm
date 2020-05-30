@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:practicemvvm/base/works_view_model.dart';
-import 'package:practicemvvm/dialog/show_delete_dialog.dart';
+import 'package:practicemvvm/dialog/show_menu_dialog.dart';
 import 'package:practicemvvm/model/story.dart';
-import 'package:provider/provider.dart';
 
 Widget storyTile(BuildContext context, dynamic value) {
   final story = value as Story;
@@ -12,11 +10,7 @@ Widget storyTile(BuildContext context, dynamic value) {
     onPressed: () {
       // ToDo: go to show contents page
     },
-    onLongPress: () => showDeleteDialog(
-      context,
-      () =>
-          Provider.of<WorksViewModel>(context, listen: false).deleteWork(story),
-    ),
+    onLongPress: () => showMenuDialog(context, story),
     child: Column(
       children: <Widget>[
         Text('タイトル: ${story.title}'),

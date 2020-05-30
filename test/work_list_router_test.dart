@@ -23,7 +23,7 @@ class TestViewModel extends WorksViewModel {
   }
 
   @override
-  Future<void> insertNewWork(String str) {
+  Future<void> insertWork(String str) {
     throw UnimplementedError();
   }
 
