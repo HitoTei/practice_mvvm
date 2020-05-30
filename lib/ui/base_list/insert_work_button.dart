@@ -10,7 +10,7 @@ class InsertWorkButton extends StatelessWidget {
       icon: const Icon(Icons.add),
       onPressed: () => showInsertDialog(
         context,
-        Provider.of<WorksViewModel>(context, listen: false).insertNewWork,
+        Provider.of<WorksViewModel>(context, listen: false).insertWork,
       ),
     );
   }

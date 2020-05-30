@@ -26,11 +26,11 @@ class WorldsViewModel extends WorksViewModel {
   }
 
   @override
-  Future<void> insertNewWork(String title) async {
+  Future<void> insertWork(String title) async {
     final time = DateTime.now();
     final world = World()
       ..title = title
-      ..createTime = time
+      ..createTime ??= time
       ..updateTime = time;
 
     await SqlProvider().insert(world);

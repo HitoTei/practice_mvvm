@@ -22,17 +22,18 @@ class StoriesViewModel extends WorksViewModel {
   @override
   Future<void> updateWork(Work work) async {
     work.updateTime = DateTime.now();
+
     SqlProvider().insert<Story>(work as Story);
     notifyListeners();
   }
 
   @override
-  Future<void> insertNewWork(String title) async {
+  Future<void> insertWork(String title) async {
     final time = DateTime.now();
     final story = Story()
       ..title = title
-      ..worldId = world.id
-      ..createTime = time
+      ..worldId ??= world.id
+      ..createTime ??= time
       ..updateTime = time;
 
     await SqlProvider().insert(story);

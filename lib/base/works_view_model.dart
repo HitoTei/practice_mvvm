@@ -6,7 +6,7 @@ abstract class WorksViewModel with ChangeNotifier {
 
   Future<void> updateWork(Work work);
 
-  Future<void> insertNewWork(String title);
+  Future<void> insertWork(String title);
 
   Future<void> deleteWork(Work work);
 
