@@ -7,7 +7,7 @@ import 'package:practicemvvm/model/work.dart';
 import 'package:provider/provider.dart';
 
 Future<void> showMenuDialog(BuildContext context, Work work) async {
-  final viewModel = Provider.of<WorksViewModel>(context);
+  final viewModel = Provider.of<WorksViewModel>(context, listen: false);
 
   return showDialog(
     context: context,
@@ -17,24 +17,25 @@ Future<void> showMenuDialog(BuildContext context, Work work) async {
         FlatButton(
           child: const Text('タイトル編集'),
           onPressed: () async {
+            Navigator.pop(context);
             await showInsertDialog(
               context,
-              viewModel.insertWork,
+              (String title) {
+                work.title = title;
+                viewModel.updateWork(work);
+              },
               initialValue: work.title,
             );
-
-            Navigator.pop(context);
           },
         ),
         FlatButton(
           child: const Text('削除'),
           onPressed: () async {
+            Navigator.pop(context);
             await showDeleteDialog(
               context,
               () => viewModel.deleteWork(work),
             );
-
-            Navigator.pop(context);
           },
         )
       ],
