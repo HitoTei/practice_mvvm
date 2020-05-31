@@ -18,6 +18,7 @@ Widget worldTile(BuildContext context, dynamic value) {
       children: <Widget>[
         Text('タイトル: ${world.title}'),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Column(
               children: <Widget>[

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practicemvvm/model/story.dart';
-import 'package:practicemvvm/ui/show_page/show_story/show_story_page.dart';
-import 'package:practicemvvm/ui/show_page/show_story/show_story_view_model.dart';
+import 'package:practicemvvm/ui/contents_detail/show_page/show_story/show_story_page.dart';
+import 'package:practicemvvm/ui/contents_detail/show_page/show_story/show_story_view_model.dart';
 import 'package:provider/provider.dart';
 
 class ShowStoryHome extends StatelessWidget {

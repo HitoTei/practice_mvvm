@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:practicemvvm/ui/edit_page/edit_story/edit_story_view_model.dart';
 import 'package:provider/provider.dart';
+import 'edit_story_view_model.dart';
 
 class StorySaveButton extends StatelessWidget {
   @override
