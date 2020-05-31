@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:practicemvvm/dialog/show_menu_dialog.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/ui/list_page/story_list/story_home_page.dart';
+import 'package:practicemvvm/ui/list_page/world_content/world_content_page.dart';
 
 Widget worldTile(BuildContext context, dynamic value) {
   final world = value as World;
@@ -10,7 +11,7 @@ Widget worldTile(BuildContext context, dynamic value) {
       context,
       MaterialPageRoute<StoryHomePage>(
         builder: (BuildContext context) {
-          return StoryHomePage(world);
+          return WorldContentPage(world);
         },
       ),
     ),

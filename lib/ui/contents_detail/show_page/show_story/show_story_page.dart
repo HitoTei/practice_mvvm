@@ -11,7 +11,7 @@ class ShowStoryPage extends StatelessWidget {
         child: Text(
           Provider.of<ShowStoryViewModel>(context, listen: false)
                   .story
-                  .content ??
+                  .contents ??
               '',
         ),
       ),

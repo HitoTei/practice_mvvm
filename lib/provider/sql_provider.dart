@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'package:path/path.dart';
-import 'package:practicemvvm/model/constant_strings.dart';
+import 'package:practicemvvm/base/constant_strings.dart';
 import 'package:practicemvvm/model/story.dart';
+import 'package:practicemvvm/model/term.dart';
 import 'package:practicemvvm/model/work.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:sqflite/sqflite.dart';
@@ -23,26 +23,37 @@ class SqlProvider {
       onCreate: (Database db, int version) async {
         await db.execute(
           '''CREATE TABLE 
-          ${World().getTableName()}(
-          $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
-          $createTimeStr TEXT,
-          $updateTimeStr TEXT,
-          $titleStr TEXT
+            ${World().getTableName()}(
+            $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
+            $createTimeStr TEXT,
+            $updateTimeStr TEXT,
+            $titleStr TEXT
           );''',
         );
         await db.execute('''
         CREATE TABLE 
           ${Story().getTableName()}(
-          $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
-          $worldIdStr INTEGER,
-          $createTimeStr TEXT,
-          $updateTimeStr TEXT,
-          $titleStr TEXT,
-          $contentsStr TEXT
+            $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
+            $worldIdStr INTEGER,
+            $createTimeStr TEXT,
+            $updateTimeStr TEXT,
+            $titleStr TEXT,
+            $contentsStr TEXT
+          );
+        ''');
+        await db.execute('''
+         CREATE TABLE
+          ${Term().getTableName()}(
+            $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
+            $worldIdStr INTEGER,
+            $createTimeStr TEXT,
+            $updateTimeStr TEXT,
+            $titleStr TEXT,
+            $contentsStr TEXT            
           );
         ''');
       },
-      version: 4,
+      version: 1,
     );
   }
 
@@ -60,18 +71,25 @@ class SqlProvider {
     final db = await _db;
     db.delete(
       work.getTableName(),
-      where: '${idStr} = ?',
+      where: '$idStr = ?',
       whereArgs: <dynamic>[work.id],
     );
   }
 
-  Future<void> deleteWorldStory(int worldId) async {
+  // その世界の物語や用語などを削除する
+  Future<void> deleteWorldContent(int worldId) async {
     final db = await _db;
-    db.delete(
-      Story().getTableName(),
-      where: '${worldIdStr} = ?',
-      whereArgs: <dynamic>[worldId],
-    );
+    db
+      ..delete(
+        Story().getTableName(),
+        where: '$worldIdStr = ?',
+        whereArgs: <dynamic>[worldId],
+      )
+      ..delete(
+        Term().getTableName(),
+        where: '$worldIdStr = ?',
+        whereArgs: <dynamic>[worldId],
+      );
   }
 
   Future<List<World>> queryWorldList() async {
@@ -99,20 +117,17 @@ class SqlProvider {
     return storyList;
   }
 
-  Future<String> queryStoryContents(int id) async {
+  Future<List<Term>> queryWorldTermList(int worldId) async {
     final db = await _db;
-    final contents = await db.query(
-      Story().getTableName(),
-      where: '$idStr = ?',
-      whereArgs: <dynamic>[id],
-      columns: [
-        contentsStr,
-      ],
+    final terms = await db.query(
+      Term().getTableName(),
+      where: '$worldIdStr = ?',
+      whereArgs: <dynamic>[worldId],
     );
-
-    if (contents.length == 0)
-      return '';
-    else
-      return contents[0][contentsStr] as String;
+    final termList = <Term>[];
+    for (final term in terms) {
+      termList.add(Term.fromMap(term));
+    }
+    return termList;
   }
 }

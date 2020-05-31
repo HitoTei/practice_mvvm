@@ -4,12 +4,12 @@ import 'package:practicemvvm/base/works_view_model.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/ui/list_page/base_list/insert_work_button.dart';
 import 'package:practicemvvm/ui/list_page/base_list/work_list_router.dart';
-import 'package:practicemvvm/ui/list_page/story_list/story_tile.dart';
-import 'package:practicemvvm/ui/list_page/story_list/story_view_model.dart';
+import 'package:practicemvvm/ui/list_page/term_list/term_tile.dart';
+import 'package:practicemvvm/ui/list_page/term_list/term_view_model.dart';
 import 'package:provider/provider.dart';
 
-class StoryHomePage extends StatelessWidget {
-  const StoryHomePage(World world) : _world = world;
+class TermHomePage extends StatelessWidget {
+  const TermHomePage(World world) : _world = world;
   final World _world;
 
   @override
@@ -17,9 +17,9 @@ class StoryHomePage extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<WorksViewModel>(
-          create: (_) => StoriesViewModel(_world),
+          create: (_) => TermsViewModel(_world),
         ),
-        Provider<TileFactory>.value(value: storyTile),
+        Provider<TileFactory>.value(value: termTile),
       ],
       child: Scaffold(
         appBar: AppBar(
