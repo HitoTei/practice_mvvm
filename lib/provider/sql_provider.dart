@@ -81,29 +81,22 @@ class SqlProvider {
     for (final world in worlds) {
       worldList.add(World.fromMap(world));
     }
-    return worldList ?? [];
+    return worldList;
   }
 
   // 世界の物語を取ってくる
-  Future<List<Story>> queryWorldStoryListWithoutContent(int worldId) async {
+  Future<List<Story>> queryWorldStoryList(int worldId) async {
     final db = await _db;
     final stories = await db.query(
       Story().getTableName(),
       where: '$worldIdStr = ?',
       whereArgs: <dynamic>[worldId],
-      columns: [
-        idStr,
-        worldIdStr,
-        titleStr,
-        updateTimeStr,
-        createTimeStr,
-      ],
     );
     final storyList = <Story>[];
     for (final story in stories) {
       storyList.add(Story.fromMap(story));
     }
-    return storyList ?? [];
+    return storyList;
   }
 
   Future<String> queryStoryContents(int id) async {

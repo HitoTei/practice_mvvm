@@ -15,7 +15,7 @@ class StoriesViewModel extends WorksViewModel {
 
   @override
   Future<void> queryWorks() async {
-    storyList = await SqlProvider().queryWorldStoryListWithoutContent(world.id);
+    storyList = await SqlProvider().queryWorldStoryList(world.id);
     notifyListeners();
   }
 

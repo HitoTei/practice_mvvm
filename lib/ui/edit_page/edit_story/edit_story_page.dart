@@ -14,11 +14,11 @@ class _EditStoryPageState extends State<EditStoryPage> {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<EditStoryViewModel>(context);
-    _editController.text = viewModel.story.content ?? '';
-
-    _editController.addListener(
-      () => viewModel.content = _editController.text,
-    );
+    _editController
+      ..text = viewModel.content ?? ''
+      ..addListener(
+        () => viewModel.content = _editController.text,
+      );
 
     return SingleChildScrollView(
       child: Column(
