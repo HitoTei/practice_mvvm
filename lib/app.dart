@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ui/home/home.dart';
+import 'package:practicemvvm/ui/list_page/world_list/home.dart';
 
 class MyApp extends StatelessWidget {
   @override
