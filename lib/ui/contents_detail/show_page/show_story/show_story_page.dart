@@ -6,9 +6,14 @@ class ShowStoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Text(
-        Provider.of<ShowStoryViewModel>(context, listen: false).story.content ??
-            '',
+      child: Container(
+        width: double.infinity,
+        child: Text(
+          Provider.of<ShowStoryViewModel>(context, listen: false)
+                  .story
+                  .content ??
+              '',
+        ),
       ),
     );
   }
