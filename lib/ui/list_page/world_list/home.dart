@@ -20,11 +20,9 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('novel writer'),
-          actions: <Widget>[
-            InsertWorkButton(),
-          ],
         ),
         body: WorkListRouterPage(),
+        floatingActionButton: InsertWorkButton(),
       ),
     );
   }

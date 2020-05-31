@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 class InsertWorkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.add),
+    return FloatingActionButton(
+      child: const Icon(Icons.add),
       onPressed: () => showInsertDialog(
         context,
         Provider.of<WorksViewModel>(context, listen: false).insertWork,

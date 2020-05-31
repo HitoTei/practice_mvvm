@@ -26,11 +26,9 @@ class StoryHomePage extends StatelessWidget {
           title: Text(
             _world.title,
           ),
-          actions: <Widget>[
-            InsertWorkButton(),
-          ],
         ),
         body: WorkListRouterPage(),
+        floatingActionButton: InsertWorkButton(),
       ),
     );
   }
