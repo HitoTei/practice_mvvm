@@ -4,7 +4,6 @@ import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/ui/list_page/story_list/story_home_page.dart';
 import 'package:practicemvvm/ui/list_page/term_list/term_home_page.dart';
 
-
 class WorldContentPage extends StatefulWidget {
   const WorldContentPage(World world) : _world = world;
   final World _world;
@@ -53,11 +52,11 @@ class _WorldContentPageState extends State<WorldContentPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           const BottomNavigationBarItem(
-            icon: const Icon(Icons.hot_tub),
+            icon: const Icon(Icons.description),
             title: const Text('Story'),
           ),
           const BottomNavigationBarItem(
-            icon: const Icon(Icons.delete),
+            icon: const Icon(Icons.storage),
             title: const Text('Term'),
           ),
         ],
