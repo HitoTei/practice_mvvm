@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
           title: const Text('novel writer'),
         ),
         body: WorkListRouterPage(),
-        floatingActionButton: InsertWorkButton(),
+        floatingActionButton: const InsertWorkButton(),
       ),
     );
   }

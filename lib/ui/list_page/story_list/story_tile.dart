@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:practicemvvm/dialog/show_menu_dialog.dart';
 import 'package:practicemvvm/model/story.dart';
 import 'package:practicemvvm/ui/contents_detail/edit_page/edit_story/edit_story_home.dart';
-import 'package:practicemvvm/ui/contents_detail/show_page/show_story/show_story_home.dart';
+import 'package:practicemvvm/ui/contents_detail/show_page/show_story/show_story_page.dart';
 
 Widget storyTile(BuildContext context, dynamic value) {
   final story = value as Story;
@@ -12,8 +12,8 @@ Widget storyTile(BuildContext context, dynamic value) {
     onPressed: () {
       Navigator.push(
         context,
-        MaterialPageRoute<ShowStoryHome>(
-          builder: (_) => ShowStoryHome(story),
+        MaterialPageRoute<ShowStoryPage>(
+          builder: (_) => ShowStoryPage(story),
         ),
       );
     },

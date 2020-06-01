@@ -2,16 +2,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practicemvvm/dialog/show_menu_dialog.dart';
 import 'package:practicemvvm/model/term.dart';
+import 'package:practicemvvm/ui/contents_detail/edit_page/edit_term/edit_term_home.dart';
+import 'package:practicemvvm/ui/contents_detail/show_page/show_term/show_term_page.dart';
 
 Widget termTile(BuildContext context, dynamic value) {
   final term = value as Term;
 
   return FlatButton(
     onPressed: () {
-      // ToDo: go to show term page
+      Navigator.push(
+        context,
+        MaterialPageRoute<ShowTermPage>(
+          builder: (_) => ShowTermPage(term),
+        ),
+      );
     },
     onLongPress: () {
-      // ToDo: go to edit term page
+      Navigator.push(
+        context,
+        MaterialPageRoute<EditTermHome>(
+          builder: (_) => EditTermHome(term),
+        ),
+      );
     },
     child: Column(
       children: <Widget>[

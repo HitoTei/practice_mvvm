@@ -1,24 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practicemvvm/base/editor_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'edit_story_view_model.dart';
-
-class EditStoryPage extends StatefulWidget {
+class EditContentsPage extends StatefulWidget {
   @override
-  _EditStoryPageState createState() => _EditStoryPageState();
+  _EditContentsPageState createState() => _EditContentsPageState();
 }
 
-class _EditStoryPageState extends State<EditStoryPage> {
+class _EditContentsPageState extends State<EditContentsPage> {
   final _editController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<EditStoryViewModel>(context);
+    final viewModel = Provider.of<EditorViewModel>(context);
     _editController
-      ..text = viewModel.content ?? ''
+      ..text = viewModel.getContents() ?? ''
       ..addListener(
-        () => viewModel.content = _editController.text,
+        () => viewModel.setContents(_editController.text),
       );
 
     return SingleChildScrollView(
