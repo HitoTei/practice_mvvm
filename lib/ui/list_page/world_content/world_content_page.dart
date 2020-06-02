@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/ui/list_page/story_list/story_home_page.dart';
 import 'package:practicemvvm/ui/list_page/term_list/term_home_page.dart';
-import 'package:provider/provider.dart';
 
 class WorldContentPage extends StatefulWidget {
   const WorldContentPage(World world) : _world = world;
@@ -34,29 +33,27 @@ class _WorldContentPageState extends State<WorldContentPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider.value(value: null),
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(_world.title),
-        ),
-        body: _widgetOption[_selectIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            const BottomNavigationBarItem(
-              icon: const Icon(Icons.description),
-              title: const Text('Story'),
-            ),
-            const BottomNavigationBarItem(
-              icon: const Icon(Icons.storage),
-              title: const Text('Term'),
-            ),
-          ],
-          currentIndex: _selectIndex,
-          onTap: onChanged,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_world.title),
+      ),
+      body: _widgetOption[_selectIndex],
+      bottomNavigationBar: BottomNavigationBar(
+
+        items: const <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
+            icon: const Icon(Icons.description),
+            title: const Text('Story'),
+          ),
+
+          const BottomNavigationBarItem(
+            icon: const Icon(Icons.storage),
+            title: const Text('Term'),
+          ),
+
+        ],
+        currentIndex: _selectIndex,
+        onTap: onChanged,
       ),
     );
   }
