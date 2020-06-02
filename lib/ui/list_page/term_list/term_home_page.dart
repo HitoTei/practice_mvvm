@@ -22,11 +22,6 @@ class TermHomePage extends StatelessWidget {
         Provider<TileFactory>.value(value: termTile),
       ],
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            _world.title,
-          ),
-        ),
         body: WorkListRouterPage(),
         floatingActionButton: const InsertWorkButton(),
       ),

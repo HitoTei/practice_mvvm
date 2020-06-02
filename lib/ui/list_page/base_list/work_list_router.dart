@@ -7,10 +7,10 @@ import 'package:provider/provider.dart';
 class WorkListRouterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final storyViewModel = Provider.of<WorksViewModel>(context);
+    final worksViewModel = Provider.of<WorksViewModel>(context);
 
-    if (storyViewModel.getWorkList() == null) {
-      storyViewModel.queryWorks();
+    if (worksViewModel.getWorkList() == null) {
+      worksViewModel.queryWorks();
       return const CircularProgressIndicator();
     }
 

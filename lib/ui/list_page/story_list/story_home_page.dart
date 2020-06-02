@@ -22,11 +22,6 @@ class StoryHomePage extends StatelessWidget {
         Provider<TileFactory>.value(value: storyTile),
       ],
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            _world.title,
-          ),
-        ),
         body: WorkListRouterPage(),
         floatingActionButton: const InsertWorkButton(),
       ),
