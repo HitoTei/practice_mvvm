@@ -7,6 +7,7 @@ class EditTermViewModel extends EditorViewModel {
 
   Term term;
   String _contents;
+
   @override
   Future<void> save() async {
     term
@@ -15,8 +16,16 @@ class EditTermViewModel extends EditorViewModel {
     SqlProvider().insert(term);
   }
 
+  Future<void> saveTag(String tag) async {
+    term
+      ..tag = tag
+      ..updateTime = DateTime.now();
+    SqlProvider().insert(term);
+  }
+
   @override
   String getContents() => _contents;
+
   @override
   void setContents(String contents) => _contents = contents;
 }

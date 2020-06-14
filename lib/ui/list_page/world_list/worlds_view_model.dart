@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:practicemvvm/base/works_view_model.dart';
 import 'package:practicemvvm/model/work.dart';
 import 'package:practicemvvm/model/world.dart';
@@ -42,6 +43,45 @@ class WorldsViewModel extends WorksViewModel {
     SqlProvider().deleteWorldContent(work.id); // こっちは特に待つ必要がない。
 
     worldList.remove(work);
+    notifyListeners();
+  }
+
+  @override
+  void sortByCreateTime({bool asc}) {
+    worldList.sort(
+      (World v1, World v2) {
+        if (asc)
+          return v1?.createTime?.compareTo(v2.createTime) ?? 0;
+        else
+          return v2?.createTime?.compareTo(v1.createTime) ?? 0;
+      },
+    );
+    notifyListeners();
+  }
+
+  @override
+  void sortByTitle({bool asc}) {
+    worldList.sort(
+      (World v1, World v2) {
+        if (asc)
+          return v1?.title?.compareTo(v2.title) ?? 0;
+        else
+          return v2?.title?.compareTo(v1.title) ?? 0;
+      },
+    );
+    notifyListeners();
+  }
+
+  @override
+  void sortByUpdateTime({bool asc}) {
+    worldList.sort(
+      (World v1, World v2) {
+        if (asc)
+          return v1?.updateTime?.compareTo(v2.updateTime) ?? 0;
+        else
+          return v2?.updateTime?.compareTo(v1.updateTime) ?? 0;
+      },
+    );
     notifyListeners();
   }
 }

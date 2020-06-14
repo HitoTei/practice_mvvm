@@ -3,7 +3,9 @@ import 'package:practicemvvm/model/work.dart';
 import '../base/constant_strings.dart';
 
 class Story extends Work {
-  Story();
+  Story() {
+    title = '';
+  }
 
   Story.fromMap(Map<String, dynamic> map) {
     id = map[idStr] as int;
@@ -15,7 +17,7 @@ class Story extends Work {
   }
 
   int worldId; // 世界のid
-  String contents; // 内容
+  String contents = ''; // 内容
 
   @override
   Map<String, dynamic> toMap() {

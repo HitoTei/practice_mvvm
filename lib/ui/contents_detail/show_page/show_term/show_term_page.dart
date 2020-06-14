@@ -11,6 +11,20 @@ class ShowTermPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(term.title ?? ''),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.label),
+            onPressed: () => showDialog<SimpleDialog>(
+              context: context,
+              builder: (_) => SimpleDialog(
+                children: <Widget>[
+                  const Text('タグ'),
+                  Text(term.tag ?? ''),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
       body: ShowContentsPage(term.contents),
     );

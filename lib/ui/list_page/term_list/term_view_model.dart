@@ -14,6 +14,12 @@ class TermsViewModel extends WorksViewModel {
   List<Work> getWorkList() => termList;
 
   @override
+  void notifyListeners() {
+    termList.sort((Term v1, Term v2) => v1.tag.compareTo(v2.tag));
+    super.notifyListeners();
+  }
+
+  @override
   Future<void> queryWorks() async {
     termList = await SqlProvider().queryWorldTermList(world.id);
     notifyListeners();
@@ -44,6 +50,45 @@ class TermsViewModel extends WorksViewModel {
   Future<void> deleteWork(Work work) async {
     await SqlProvider().delete<Term>(work as Term);
     termList.remove(work);
+    notifyListeners();
+  }
+
+  @override
+  void sortByCreateTime({bool asc}) {
+    termList.sort(
+      (Term v1, Term v2) {
+        if (asc)
+          return v1?.createTime?.compareTo(v2.createTime) ?? 0;
+        else
+          return v2?.createTime?.compareTo(v1.createTime) ?? 0;
+      },
+    );
+    notifyListeners();
+  }
+
+  @override
+  void sortByTitle({bool asc}) {
+    termList.sort(
+      (Term v1, Term v2) {
+        if (asc)
+          return v1?.title?.compareTo(v2.title) ?? 0;
+        else
+          return v2?.title?.compareTo(v1.title) ?? 0;
+      },
+    );
+    notifyListeners();
+  }
+
+  @override
+  void sortByUpdateTime({bool asc}) {
+    termList.sort(
+      (Term v1, Term v2) {
+        if (asc)
+          return v1?.updateTime?.compareTo(v2.updateTime) ?? 0;
+        else
+          return v2?.updateTime?.compareTo(v1.updateTime) ?? 0;
+      },
+    );
     notifyListeners();
   }
 }

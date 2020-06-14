@@ -49,7 +49,8 @@ class SqlProvider {
             $createTimeStr TEXT,
             $updateTimeStr TEXT,
             $titleStr TEXT,
-            $contentsStr TEXT            
+            $contentsStr TEXT,
+            $tagStr TEXT            
           );
         ''');
       },

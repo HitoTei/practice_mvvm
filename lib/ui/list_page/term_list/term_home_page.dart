@@ -3,7 +3,8 @@ import 'package:practicemvvm/base/tile_factory.dart';
 import 'package:practicemvvm/base/works_view_model.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/ui/list_page/base_list/insert_work_button.dart';
-import 'package:practicemvvm/ui/list_page/base_list/work_list_router.dart';
+import 'package:practicemvvm/ui/list_page/base_list/sort_work_button.dart';
+import 'package:practicemvvm/ui/list_page/term_list/term_list_router.dart';
 import 'package:practicemvvm/ui/list_page/term_list/term_tile.dart';
 import 'package:practicemvvm/ui/list_page/term_list/term_view_model.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,13 @@ class TermHomePage extends StatelessWidget {
         Provider<TileFactory>.value(value: termTile),
       ],
       child: Scaffold(
-        body: WorkListRouterPage(),
+        appBar: AppBar(
+          title: Text(_world.title ?? 'null'),
+          actions: <Widget>[
+            SortWorkButton(),
+          ],
+        ),
+        body: TermListRouterPage(),
         floatingActionButton: const InsertWorkButton(),
       ),
     );

@@ -34,9 +34,6 @@ class _WorldContentPageState extends State<WorldContentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_world.title),
-      ),
       body: _widgetOption[_selectIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

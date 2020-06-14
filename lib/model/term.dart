@@ -3,7 +3,10 @@ import 'package:practicemvvm/model/work.dart';
 
 // 用語
 class Term extends Work {
-  Term();
+  Term() {
+    title = '';
+  }
+
   Term.fromMap(Map<String, dynamic> map) {
     id = map[idStr] as int;
     createTime = DateTime.parse(map[createTimeStr] as String);
@@ -11,9 +14,12 @@ class Term extends Work {
     title = map[titleStr] as String;
     contents = map[contentsStr] as String;
     worldId = map[worldIdStr] as int;
+    tag = map[tagStr] as String;
   }
+
   int worldId;
-  String contents;
+  String contents = '';
+  String tag = '';
 
   @override
   String getTableName() {
@@ -29,6 +35,7 @@ class Term extends Work {
       updateTimeStr: updateTime.toString(),
       titleStr: title,
       contentsStr: contents,
+      tagStr: tag,
     };
   }
 }

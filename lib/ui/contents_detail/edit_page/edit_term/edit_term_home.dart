@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practicemvvm/base/editor_view_model.dart';
 import 'package:practicemvvm/model/term.dart';
+import 'package:practicemvvm/ui/contents_detail/edit_page/edit_term/edit_tag_button.dart';
 import 'package:provider/provider.dart';
 
 import '../edit_contents_page.dart';
@@ -23,10 +24,11 @@ class EditTermHome extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           actions: <Widget>[
+            EditTagButton(term),
             SaveButton(),
           ],
           title: Text(
-            term.title,
+            term.title ?? '',
           ),
         ),
         body: EditContentsPage(),

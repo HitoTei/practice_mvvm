@@ -3,7 +3,9 @@ import 'package:practicemvvm/model/work.dart';
 import '../base/constant_strings.dart';
 
 class World extends Work {
-  World();
+  World() {
+    title = '';
+  }
 
   @override
   World.fromMap(Map<String, dynamic> map) {
