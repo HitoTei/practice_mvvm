@@ -12,6 +12,7 @@ class WorkListPage extends StatelessWidget {
     final workList = worksViewModel.getWorkList();
 
     return ListView.separated(
+      padding: const EdgeInsets.all(8),
       itemBuilder: (context, index) => tileFactory(context, workList[index]),
       separatorBuilder: (_, __) => const Divider(),
       itemCount: workList.length,

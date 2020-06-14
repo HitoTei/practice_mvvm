@@ -39,18 +39,15 @@ class _WorldContentPageState extends State<WorldContentPage> {
       ),
       body: _widgetOption[_selectIndex],
       bottomNavigationBar: BottomNavigationBar(
-
         items: const <BottomNavigationBarItem>[
           const BottomNavigationBarItem(
             icon: const Icon(Icons.description),
             title: const Text('Story'),
           ),
-
           const BottomNavigationBarItem(
             icon: const Icon(Icons.storage),
             title: const Text('Term'),
           ),
-
         ],
         currentIndex: _selectIndex,
         onTap: onChanged,

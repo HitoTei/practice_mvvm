@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practicemvvm/base/functions.dart';
 import 'package:practicemvvm/dialog/show_menu_dialog.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:practicemvvm/ui/list_page/story_list/story_home_page.dart';
@@ -16,15 +17,26 @@ Widget worldTile(BuildContext context, dynamic value) {
       ),
     ),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('タイトル: ${world.title}'),
+        Text(
+          '${world.title}',
+          style: const TextStyle(fontSize: 20),
+          overflow: TextOverflow.ellipsis,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Column(
               children: <Widget>[
-                Text('作成時間: ${world.createTime}'),
-                Text('更新期間: ${world.updateTime}'),
+                Text(
+                  '作成時間: ${dateToString(world.createTime)}',
+                  style: const TextStyle(color: Colors.grey),
+                ),
+                Text(
+                  '更新期間: ${dateToString(world.updateTime)}',
+                  style: const TextStyle(color: Colors.grey),
+                ),
               ],
             ),
             IconButton(

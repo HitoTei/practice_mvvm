@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practicemvvm/base/functions.dart';
 import 'package:practicemvvm/dialog/show_menu_dialog.dart';
 import 'package:practicemvvm/model/story.dart';
 import 'package:practicemvvm/ui/contents_detail/edit_page/edit_story/edit_story_home.dart';
@@ -26,16 +27,32 @@ Widget storyTile(BuildContext context, dynamic value) {
       );
     },
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('タイトル: ${story.title}'),
-        Text('世界: ${story.worldId}'),
+        Text(
+          '${story.title}',
+          style: const TextStyle(
+            fontSize: 20,
+          ),
+          overflow: TextOverflow.ellipsis,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Column(
               children: [
-                Text('作成時間: ${story.createTime}'),
-                Text('更新期間: ${story.updateTime}'),
+                Text(
+                  '作成時間: ${dateToString(story.createTime)}',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                Text(
+                  '更新期間: ${dateToString(story.updateTime)}',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
               ],
             ),
             IconButton(
