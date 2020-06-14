@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practicemvvm/base/tile_factory.dart';
 import 'package:practicemvvm/base/works_view_model.dart';
+import 'package:practicemvvm/dark_mode.dart';
 import 'package:practicemvvm/ui/list_page/base_list/insert_work_button.dart';
 import 'package:practicemvvm/ui/list_page/base_list/work_list_router.dart';
 import 'package:practicemvvm/ui/list_page/world_list/world_tile.dart';
@@ -20,6 +21,14 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('novel writer'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.lightbulb_outline,
+              ),
+              onPressed: DarkMode().reverse,
+            )
+          ],
         ),
         body: WorkListRouterPage(),
         floatingActionButton: const InsertWorkButton(),
