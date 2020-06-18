@@ -27,6 +27,8 @@ class _EditContentsPageState extends State<EditContentsPage> {
             controller: _editController,
             keyboardType: TextInputType.multiline,
             maxLines: null,
+            maxLength: 100000,
+            showCursor: true,
             style: const TextStyle(
               fontSize: 20,
             ),

@@ -13,13 +13,19 @@ class ShowTermPage extends StatelessWidget {
         title: Text(term.title ?? ''),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.label),
+            icon: const Icon(Icons.more),
             onPressed: () => showDialog<SimpleDialog>(
               context: context,
               builder: (_) => SimpleDialog(
                 children: <Widget>[
-                  const Text('タグ'),
-                  Text(term.tag ?? ''),
+                  Text(
+                    'タグ: ${term.tag ?? ''}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    '文字数: ${(term.contents.length ?? 0).toString()}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
                 ],
               ),
             ),

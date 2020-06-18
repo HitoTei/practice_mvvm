@@ -11,6 +11,22 @@ class ShowStoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(story.title ?? ''),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.more),
+            onPressed: () => showDialog<SimpleDialog>(
+              context: context,
+              builder: (_) => SimpleDialog(
+                children: <Widget>[
+                  Text(
+                    '文字数: ${(story.contents.length ?? 0).toString()}',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
       body: ShowContentsPage(story.contents),
     );
