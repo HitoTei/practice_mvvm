@@ -16,33 +16,33 @@ class TermTagWidget extends StatelessWidget {
     final viewModel =
         Provider.of<WorksViewModel>(context, listen: false) as TermsViewModel;
 
-    if (currentTag != previousTag) {
-      if (currentTag != null && currentTag.isNotEmpty) {
-        return FlatButton(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(30),
-                child: Text(
-                  currentTag,
-                  style: const TextStyle(fontSize: 30),
-                ),
+    if (currentTag != previousTag &&
+        currentTag != null &&
+        currentTag.isNotEmpty) {
+      return FlatButton(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(30),
+              child: Text(
+                currentTag,
+                style: const TextStyle(fontSize: 30),
               ),
-              const Divider(),
-            ],
-          ),
-          onPressed: () {
-            showInsertDialog(
-              context,
-              (newTag) {
-                viewModel.updateTag(currentTag, newTag);
-              },
-              initialValue: currentTag,
-              title: 'タグ',
-            );
-          },
-        );
-      }
+            ),
+            const Divider(),
+          ],
+        ),
+        onPressed: () {
+          showInsertDialog(
+            context,
+            (newTag) {
+              viewModel.updateTag(currentTag, newTag);
+            },
+            initialValue: currentTag,
+            title: 'タグ',
+          );
+        },
+      );
     }
 
     return Container();
