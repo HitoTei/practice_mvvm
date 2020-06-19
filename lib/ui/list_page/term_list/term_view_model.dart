@@ -53,6 +53,14 @@ class TermsViewModel extends WorksViewModel {
     notifyListeners();
   }
 
+  Future<void> updateTag(String oldTag, String newTag) async {
+    await SqlProvider().updateTag(oldTag, newTag);
+    for (final term in termList) {
+      if (term.tag == oldTag) term.tag = newTag;
+    }
+    notifyListeners();
+  }
+
   @override
   void sortByCreateTime({bool asc}) {
     termList.sort(

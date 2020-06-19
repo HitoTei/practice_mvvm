@@ -131,4 +131,16 @@ class SqlProvider {
     }
     return termList;
   }
+
+  Future<void> updateTag(String oldTag, String newTag) async {
+    final db = await _db;
+    db.rawUpdate(
+      '''
+      UPDATE ${Term().getTableName()}
+      SET $tagStr = ?
+      WHERE $tagStr = ?
+      ''',
+      <dynamic>[newTag, oldTag],
+    );
+  }
 }
