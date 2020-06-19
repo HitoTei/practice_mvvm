@@ -22,7 +22,7 @@ Future<void> showInsertDialog(
           },
         ),
         FlatButton(
-          child: const Text('追加'),
+          child: Text(initialValue.isEmpty ? '追加' : '編集'),
           onPressed: () {
             if (editing != null && editing.isNotEmpty) insert(editing);
             Navigator.pop(context);
