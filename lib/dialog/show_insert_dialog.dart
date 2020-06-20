@@ -4,24 +4,27 @@ Future<void> showInsertDialog(
   BuildContext context,
   Function(String) insert, {
   String initialValue = '',
+  String title = '題名',
 }) async {
-  String title;
+  var editing = initialValue;
 
   return showDialog(
     context: context,
     builder: (_) => SimpleDialog(
-      title: const Text('題名'),
+      title: Text(
+        title,
+      ),
       children: <Widget>[
         TextFormField(
           initialValue: initialValue,
           onChanged: (value) {
-            title = value;
+            editing = value;
           },
         ),
         FlatButton(
           child: const Text('追加'),
           onPressed: () {
-            insert(title);
+            if (editing != null && editing.isNotEmpty) insert(editing);
             Navigator.pop(context);
           },
         ),

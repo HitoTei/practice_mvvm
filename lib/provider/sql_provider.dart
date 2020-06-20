@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'package:path/path.dart';
-import 'package:practicemvvm/model/constant_strings.dart';
+import 'package:practicemvvm/base/constant_strings.dart';
 import 'package:practicemvvm/model/story.dart';
+import 'package:practicemvvm/model/term.dart';
 import 'package:practicemvvm/model/work.dart';
 import 'package:practicemvvm/model/world.dart';
 import 'package:sqflite/sqflite.dart';
@@ -23,26 +23,38 @@ class SqlProvider {
       onCreate: (Database db, int version) async {
         await db.execute(
           '''CREATE TABLE 
-          ${World().getTableName()}(
-          $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
-          $createTimeStr TEXT,
-          $updateTimeStr TEXT,
-          $titleStr TEXT
+            ${World().getTableName()}(
+            $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
+            $createTimeStr TEXT,
+            $updateTimeStr TEXT,
+            $titleStr TEXT
           );''',
         );
         await db.execute('''
         CREATE TABLE 
           ${Story().getTableName()}(
-          $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
-          $worldIdStr INTEGER,
-          $createTimeStr TEXT,
-          $updateTimeStr TEXT,
-          $titleStr TEXT,
-          $contentsStr TEXT
+            $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
+            $worldIdStr INTEGER,
+            $createTimeStr TEXT,
+            $updateTimeStr TEXT,
+            $titleStr TEXT,
+            $contentsStr TEXT
+          );
+        ''');
+        await db.execute('''
+         CREATE TABLE
+          ${Term().getTableName()}(
+            $idStr INTEGER PRIMARY KEY AUTOINCREMENT,
+            $worldIdStr INTEGER,
+            $createTimeStr TEXT,
+            $updateTimeStr TEXT,
+            $titleStr TEXT,
+            $contentsStr TEXT,
+            $tagStr TEXT            
           );
         ''');
       },
-      version: 4,
+      version: 1,
     );
   }
 
@@ -60,18 +72,25 @@ class SqlProvider {
     final db = await _db;
     db.delete(
       work.getTableName(),
-      where: '${idStr} = ?',
+      where: '$idStr = ?',
       whereArgs: <dynamic>[work.id],
     );
   }
 
-  Future<void> deleteWorldStory(int worldId) async {
+  // その世界の物語や用語などを削除する
+  Future<void> deleteWorldContent(int worldId) async {
     final db = await _db;
-    db.delete(
-      Story().getTableName(),
-      where: '${worldIdStr} = ?',
-      whereArgs: <dynamic>[worldId],
-    );
+    db
+      ..delete(
+        Story().getTableName(),
+        where: '$worldIdStr = ?',
+        whereArgs: <dynamic>[worldId],
+      )
+      ..delete(
+        Term().getTableName(),
+        where: '$worldIdStr = ?',
+        whereArgs: <dynamic>[worldId],
+      );
   }
 
   Future<List<World>> queryWorldList() async {
@@ -81,45 +100,47 @@ class SqlProvider {
     for (final world in worlds) {
       worldList.add(World.fromMap(world));
     }
-    return worldList ?? [];
+    return worldList;
   }
 
   // 世界の物語を取ってくる
-  Future<List<Story>> queryWorldStoryListWithoutContent(int worldId) async {
+  Future<List<Story>> queryWorldStoryList(int worldId) async {
     final db = await _db;
     final stories = await db.query(
       Story().getTableName(),
       where: '$worldIdStr = ?',
       whereArgs: <dynamic>[worldId],
-      columns: [
-        idStr,
-        worldIdStr,
-        titleStr,
-        updateTimeStr,
-        createTimeStr,
-      ],
     );
     final storyList = <Story>[];
     for (final story in stories) {
       storyList.add(Story.fromMap(story));
     }
-    return storyList ?? [];
+    return storyList;
   }
 
-  Future<String> queryStoryContents(int id) async {
+  Future<List<Term>> queryWorldTermList(int worldId) async {
     final db = await _db;
-    final contents = await db.query(
-      Story().getTableName(),
-      where: '$idStr = ?',
-      whereArgs: <dynamic>[id],
-      columns: [
-        contentsStr,
-      ],
+    final terms = await db.query(
+      Term().getTableName(),
+      where: '$worldIdStr = ?',
+      whereArgs: <dynamic>[worldId],
     );
+    final termList = <Term>[];
+    for (final term in terms) {
+      termList.add(Term.fromMap(term));
+    }
+    return termList;
+  }
 
-    if (contents.length == 0)
-      return '';
-    else
-      return contents[0][contentsStr] as String;
+  Future<void> updateTag(String oldTag, String newTag) async {
+    final db = await _db;
+    db.rawUpdate(
+      '''
+      UPDATE ${Term().getTableName()}
+      SET $tagStr = ?
+      WHERE $tagStr = ?
+      ''',
+      <dynamic>[newTag, oldTag],
+    );
   }
 }

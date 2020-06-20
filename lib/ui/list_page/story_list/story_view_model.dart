@@ -15,7 +15,7 @@ class StoriesViewModel extends WorksViewModel {
 
   @override
   Future<void> queryWorks() async {
-    storyList = await SqlProvider().queryWorldStoryListWithoutContent(world.id);
+    storyList = await SqlProvider().queryWorldStoryList(world.id);
     notifyListeners();
   }
 
@@ -44,6 +44,45 @@ class StoriesViewModel extends WorksViewModel {
   Future<void> deleteWork(Work work) async {
     await SqlProvider().delete<Story>(work as Story);
     storyList.remove(work);
+    notifyListeners();
+  }
+
+  @override
+  void sortByCreateTime({bool asc}) {
+    storyList.sort(
+      (Story v1, Story v2) {
+        if (asc)
+          return v1?.createTime?.compareTo(v2.createTime) ?? 0;
+        else
+          return v2?.createTime?.compareTo(v1.createTime) ?? 0;
+      },
+    );
+    notifyListeners();
+  }
+
+  @override
+  void sortByTitle({bool asc}) {
+    storyList.sort(
+      (Story v1, Story v2) {
+        if (asc)
+          return v1?.title?.compareTo(v2.title) ?? 0;
+        else
+          return v2?.title?.compareTo(v1.title) ?? 0;
+      },
+    );
+    notifyListeners();
+  }
+
+  @override
+  void sortByUpdateTime({bool asc}) {
+    storyList.sort(
+      (Story v1, Story v2) {
+        if (asc)
+          return v1?.updateTime?.compareTo(v2.updateTime) ?? 0;
+        else
+          return v2?.updateTime?.compareTo(v1.updateTime) ?? 0;
+      },
+    );
     notifyListeners();
   }
 }

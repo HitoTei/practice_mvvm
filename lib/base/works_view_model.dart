@@ -11,4 +11,10 @@ abstract class WorksViewModel with ChangeNotifier {
   Future<void> deleteWork(Work work);
 
   List<Work> getWorkList();
+
+  void sortByUpdateTime({bool asc});
+
+  void sortByCreateTime({bool asc});
+
+  void sortByTitle({bool asc});
 }
