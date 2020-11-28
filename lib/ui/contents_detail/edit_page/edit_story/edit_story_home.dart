@@ -29,7 +29,7 @@ class EditStoryHome extends StatelessWidget {
             story.title,
           ),
         ),
-        body: EditContentsPage(),
+        body: const EditContentsPage(),
       ),
     );
   }

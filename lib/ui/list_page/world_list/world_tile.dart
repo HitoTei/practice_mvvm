@@ -40,7 +40,7 @@ Widget worldTile(BuildContext context, dynamic value) {
               ],
             ),
             IconButton(
-              icon: Icon(Icons.more_vert),
+              icon: const Icon(Icons.more_vert),
               onPressed: () => showMenuDialog(context, world),
             )
           ],

@@ -4,6 +4,8 @@ import 'package:practicemvvm/base/editor_view_model.dart';
 import 'package:provider/provider.dart';
 
 class EditContentsPage extends StatefulWidget {
+  const EditContentsPage();
+
   @override
   _EditContentsPageState createState() => _EditContentsPageState();
 }
@@ -12,14 +14,18 @@ class _EditContentsPageState extends State<EditContentsPage> {
   final _editController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    final viewModel = Provider.of<EditorViewModel>(context);
+  void initState() {
+    final viewModel = Provider.of<EditorViewModel>(context, listen: false);
     _editController
       ..text = viewModel.getContents() ?? ''
       ..addListener(
         () => viewModel.setContents(_editController.text),
       );
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -30,7 +36,7 @@ class _EditContentsPageState extends State<EditContentsPage> {
             maxLength: 100000,
             showCursor: true,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
         ],

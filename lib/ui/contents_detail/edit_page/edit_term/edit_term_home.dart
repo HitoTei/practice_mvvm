@@ -31,7 +31,7 @@ class EditTermHome extends StatelessWidget {
             term.title ?? '',
           ),
         ),
-        body: EditContentsPage(),
+        body: const EditContentsPage(),
       ),
     );
   }

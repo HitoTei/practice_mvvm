@@ -132,15 +132,19 @@ class SqlProvider {
     return termList;
   }
 
-  Future<void> updateTag(String oldTag, String newTag) async {
+  Future<void> updateTag(int worldId, String oldTag, String newTag) async {
     final db = await _db;
     db.rawUpdate(
       '''
       UPDATE ${Term().getTableName()}
       SET $tagStr = ?
-      WHERE $tagStr = ?
+      WHERE $tagStr = ? AND $worldIdStr = ?
       ''',
-      <dynamic>[newTag, oldTag],
+      <dynamic>[
+        newTag,
+        oldTag,
+        worldId,
+      ],
     );
   }
 }

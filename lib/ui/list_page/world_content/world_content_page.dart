@@ -39,11 +39,11 @@ class _WorldContentPageState extends State<WorldContentPage> {
         items: const <BottomNavigationBarItem>[
           const BottomNavigationBarItem(
             icon: const Icon(Icons.description),
-            title: const Text('Story'),
+            label: 'Story',
           ),
           const BottomNavigationBarItem(
             icon: const Icon(Icons.storage),
-            title: const Text('Term'),
+            label: 'Term',
           ),
         ],
         currentIndex: _selectIndex,
