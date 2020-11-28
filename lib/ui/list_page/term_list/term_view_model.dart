@@ -56,7 +56,9 @@ class TermsViewModel extends WorksViewModel {
   Future<void> updateTag(String oldTag, String newTag) async {
     await SqlProvider().updateTag(world.id, oldTag, newTag);
     for (final term in termList) {
-      if (term.tag == oldTag) term.tag = newTag;
+      if (term.tag == oldTag) {
+        term.tag = newTag;
+      }
     }
     notifyListeners();
   }
