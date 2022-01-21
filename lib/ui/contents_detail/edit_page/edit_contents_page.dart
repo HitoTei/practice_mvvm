@@ -17,7 +17,10 @@ class _EditContentsPageState extends State<EditContentsPage> {
     _editController
       ..text = viewModel.getContents() ?? ''
       ..addListener(
-        () => viewModel.setContents(_editController.text),
+        () async {
+          viewModel.setContents(_editController.text);
+          await viewModel.save();
+        },
       );
 
     return SingleChildScrollView(

@@ -5,7 +5,6 @@ import 'package:practicemvvm/model/story.dart';
 import 'package:provider/provider.dart';
 
 import '../edit_contents_page.dart';
-import '../save_button.dart';
 import 'edit_story_view_model.dart';
 
 class EditStoryHome extends StatelessWidget {
@@ -22,9 +21,6 @@ class EditStoryHome extends StatelessWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          actions: <Widget>[
-            SaveButton(),
-          ],
           title: Text(
             story.title,
           ),

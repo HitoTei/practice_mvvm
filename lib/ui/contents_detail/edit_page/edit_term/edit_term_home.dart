@@ -6,7 +6,6 @@ import 'package:practicemvvm/ui/contents_detail/edit_page/edit_term/edit_tag_but
 import 'package:provider/provider.dart';
 
 import '../edit_contents_page.dart';
-import '../save_button.dart';
 import 'edit_term_view_model.dart';
 
 class EditTermHome extends StatelessWidget {
@@ -25,7 +24,6 @@ class EditTermHome extends StatelessWidget {
         appBar: AppBar(
           actions: <Widget>[
             EditTagButton(term),
-            SaveButton(),
           ],
           title: Text(
             term.title ?? '',
