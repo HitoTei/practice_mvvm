@@ -32,7 +32,10 @@ class ShowTermPage extends StatelessWidget {
           )
         ],
       ),
-      body: ShowContentsPage(term.contents),
+      body: ShowContentsPage(
+        term.contents,
+        isMarkdown: term.title?.contains('(md)') ?? false,
+      ),
     );
   }
 }
